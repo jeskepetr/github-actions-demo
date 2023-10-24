@@ -34,4 +34,23 @@ jobs:
         with:
           message: "**Hello** 🌏 !"
       - name: Call custom action
+        id: demo_call
         uses: jeskepetr/github-actions-by-pj/demo@main
+      - name: Print demo output
+        run: echo "Random-number - ${{ steps.demo_call.outputs.random-number }}"
+        shell: bash
+
+  ##########################
+  #  CREATE ARTIFACT STAGE
+  ##########################
+  create-artifact-stage:
+    needs: actions-demo-stage
+    uses: ./.github/workflows/rw_create_artifact.yml
+
+  ##########################
+  #  READ ARTIFACT STAGE
+  ##########################
+  download-artifact-stage:
+    needs: create-artifact-stage
+    uses: ./.github/workflows/rw_download_artifact.yml
+

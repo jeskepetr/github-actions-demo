@@ -1,0 +1,15 @@
+on:
+  workflow_call:
+
+jobs:
+  read-artifacts:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download result for kotlin changes
+        uses: actions/download-artifact@v3
+        with:
+          name: changed-components
+      - shell: bash
+        run: |
+          value=`cat changedFiles.txt`
+          echo Changed files are: $value

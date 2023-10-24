@@ -1,0 +1,16 @@
+on:
+  workflow_call:
+
+jobs:
+  collect-changed-components:
+    name: Collect Kotlin Changes
+    runs-on: ubuntu-latest
+    steps:
+      - shell: bash
+        run: |
+          echo "fileA,fileB" > changedFiles.txt
+      - name: Upload result for kotlin changes
+        uses: actions/upload-artifact@v3
+        with:
+          name: changed-components
+          path: changedFiles.txt

@@ -16,12 +16,14 @@ jobs:
           echo "Hello there"
           echo "$NAME"
 
-  ##########################
-  #  BUILD STAGE
-  ##########################
-  # Market place link –> https://github.com/marketplace/actions/add-pr-comment
-  ##########################
-  build-stage:
+  ##############################################################################
+  #  ACTIONS DEMO STAGE
+  ##############################################################################
+  # Market-place link –> https://github.com/marketplace/actions/add-pr-comment
+  # Custom action link –> https://github.com/jeskepetr/github-actions-by-pj
+  # Gooddata Github actions -> https://github.com/gooddata/github-actions
+  ##############################################################################
+  actions-demo-stage:
     runs-on: ubuntu-latest
     needs: setup-stage
     permissions:
@@ -31,3 +33,5 @@ jobs:
         uses: mshick/add-pr-comment@v2
         with:
           message: "**Hello** 🌏 !"
+      - name: Call custom action
+        uses: jeskepetr/github-actions-by-pj/demo@main

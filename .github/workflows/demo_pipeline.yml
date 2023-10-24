@@ -1,0 +1,18 @@
+name: Demo pipeline
+on: push
+
+jobs:
+
+  ##########################
+  #  SETUP STAGE
+  ##########################
+  setup-stage:
+    runs-on: ubuntu-latest
+    env:
+      NAME: General Kenobi
+    steps:
+      - name: Greet
+      - run: |
+          echo "Hello there"
+          echo "$NAME"
+

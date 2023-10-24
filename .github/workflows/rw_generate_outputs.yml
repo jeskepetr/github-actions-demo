@@ -1,0 +1,17 @@
+on:
+  workflow_call:
+    outputs:
+      changed-components:
+        description: "Changed kotlin components"
+        value: ${{ jobs.collect-kotlin-changes.outputs.output1 }}
+
+jobs:
+  collect-kotlin-changes:
+    name: Collect Kotlin Changes
+    runs-on: ubuntu-latest
+    outputs:
+      output1: ${{ steps.evaluate-changes.outputs.changed-components}}
+    steps:
+      - id: evaluate-changes
+        run: |
+          echo "changed-components=fileA,fileB" >> $GITHUB_OUTPUT

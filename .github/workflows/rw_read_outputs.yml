@@ -1,0 +1,16 @@
+on:
+  workflow_call:
+    inputs:
+      changed-components:
+        description: 'Changed kotlin components'
+        type: string
+        required: true
+
+jobs:
+  test-kotlin-changes:
+    name: Test Kotlin Changes
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print results of kotlin changes
+        run: |
+          echo "Changed components passed via output ${{ inputs.changed-components }}"

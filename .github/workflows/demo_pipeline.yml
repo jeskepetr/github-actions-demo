@@ -12,7 +12,22 @@ jobs:
       NAME: General Kenobi
     steps:
       - name: Greet
-      - run: |
+        run: |
           echo "Hello there"
           echo "$NAME"
 
+  ##########################
+  #  BUILD STAGE
+  ##########################
+  # Market place link –> https://github.com/marketplace/actions/add-pr-comment
+  ##########################
+  build-stage:
+    runs-on: ubuntu-latest
+    needs: setup-stage
+    permissions:
+      pull-requests: write
+    steps:
+      - name: Add pr comment
+        uses: mshick/add-pr-comment@v2
+        with:
+          message: "**Hello** 🌏 !"

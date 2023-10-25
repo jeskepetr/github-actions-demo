@@ -2,7 +2,7 @@ on:
   workflow_call:
 
 jobs:
-  collect-changed-components:
+  collect-changed-components-artifacts:
     name: Collect Kotlin Changes
     runs-on: ubuntu-latest
     steps:

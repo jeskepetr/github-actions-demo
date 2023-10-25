@@ -3,10 +3,10 @@ on:
     outputs:
       changed-components:
         description: "Changed kotlin components"
-        value: ${{ jobs.collect-kotlin-changes.outputs.output1 }}
+        value: ${{ jobs.collect-kotlin-changes-outputs.outputs.output1 }}
 
 jobs:
-  collect-kotlin-changes:
+  collect-kotlin-changes-outputs:
     name: Collect Kotlin Changes
     runs-on: ubuntu-latest
     outputs:

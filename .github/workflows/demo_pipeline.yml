@@ -1,8 +1,10 @@
 name: Demo pipeline
 on: push
 
-jobs:
+env:
+  NAME: General Kenobi
 
+jobs:
   ##########################
   #  SETUP STAGE
   ##########################
@@ -13,69 +15,73 @@ jobs:
     steps:
       - name: Greet
         run: |
-          echo "Hello there"
+          echo "Hello there!"
           echo "$NAME"
 
-  #########################
-  #  ACTIONS DEMO STAGE
-  #########################
-  actions-demo-stage:
-    runs-on: ubuntu-latest
-    needs: setup-stage
-    permissions:
-      pull-requests: write
-    steps:
-      - name: Add pr comment
-        uses: mshick/add-pr-comment@v2
-        with:
-          message: "**Hello** 🌏 !"
-      - name: Call custom action
-        id: demo_call
-        uses: jeskepetr/github-actions-by-pj/demo@main
-      - name: Print demo output
-        run: echo "Random-number ${{ steps.demo_call.outputs.random-number }}"
-        shell: bash
-
-  ##########################
-  #  CREATE ARTIFACT STAGE
-  ##########################
-  create-artifact-stage:
-    needs: setup-stage
-    uses: ./.github/workflows/rw_create_artifact.yml
-
-  ##########################
-  #  READ ARTIFACT STAGE
-  ##########################
-  download-artifact-stage:
-    needs: create-artifact-stage
-    uses: ./.github/workflows/rw_download_artifact.yml
-
-  ##########################
-  #  GENERATE OUTPUTS STAGE
-  ##########################
-  generate-outputs-stage:
-    needs: setup-stage
-    uses: ./.github/workflows/rw_generate_outputs.yml
-
-  ##########################
-  #  READ OUTPUTS STAGE
-  ##########################
-  read-outputs-stage:
-    needs: generate-outputs-stage
-    uses: ./.github/workflows/rw_read_outputs.yml
-    with:
-      changed-components: ${{ needs.generate-outputs-stage.outputs.changed-components }}
-
-  ##########################
-  #  MATRIX DEMO STAGE
-  ##########################
-  run-matrix-job:
-    name: Run matrix job
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        component: ["a", "b"]
-    steps:
-      - name: Matrix job
-        run: |
-          echo "Running build for component: ${{ matrix.component }}"
+#  ##############################################################################
+#  #  ACTIONS DEMO STAGE
+#  ##############################################################################
+#  # Market-place link –> https://github.com/marketplace/actions/add-pr-comment
+#  # Custom action link –> https://github.com/jeskepetr/github-actions-by-pj
+#  # Gooddata Github actions -> https://github.com/gooddata/github-actions
+#  ##############################################################################
+#  actions-demo-stage:
+#    runs-on: ubuntu-latest
+#    needs: setup-stage
+#    permissions:
+#      pull-requests: write
+#    steps:
+#      - name: Add pr comment
+#        uses: mshick/add-pr-comment@v2
+#        with:
+#          message: "**Hello** 🌏 !"
+#      - name: Call custom action
+#        id: demo_call
+#        uses: jeskepetr/github-actions-by-pj/demo@main
+#      - name: Print demo output
+#        run: echo "Random-number ${{ steps.demo_call.outputs.random-number }}"
+#        shell: bash
+#
+#  ##########################
+#  #  CREATE ARTIFACT STAGE
+#  ##########################
+#  create-artifact-stage:
+#    needs: setup-stage
+#    uses: ./.github/workflows/rw_create_artifact.yml
+#
+#  ##########################
+#  #  READ ARTIFACT STAGE
+#  ##########################
+#  download-artifact-stage:
+#    needs: create-artifact-stage
+#    uses: ./.github/workflows/rw_download_artifact.yml
+#
+#  ##########################
+#  #  GENERATE OUTPUTS STAGE
+#  ##########################
+#  generate-outputs-stage:
+#    needs: setup-stage
+#    uses: ./.github/workflows/rw_generate_outputs.yml
+#
+#  ##########################
+#  #  READ OUTPUTS STAGE
+#  ##########################
+#  read-outputs-stage:
+#    needs: generate-outputs-stage
+#    uses: ./.github/workflows/rw_read_outputs.yml
+#    with:
+#      changed-components: ${{ needs.generate-outputs-stage.outputs.changed-components }}
+#
+#  ##########################
+#  #  MATRIX DEMO STAGE
+#  ##########################
+#  run-matrix-job:
+#    name: Run matrix job
+#    runs-on: ubuntu-latest
+#    strategy:
+#      matrix:
+#        component: ["a", "b"]
+#    steps:
+#      - name: Matrix job
+#        run: |
+#          echo "Running build for component: ${{ matrix.component }}"
